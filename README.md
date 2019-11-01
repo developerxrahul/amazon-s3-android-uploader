@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 }
  ```
  
- #Licence
+ # Licence
 ```
 Copyright (c) 2019 Rahul Chourasia
 
