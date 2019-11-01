@@ -30,8 +30,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        rcS3Uploader.uploadImageTos3(MainActivity.this, imageUri); /*Uri of image which you wish to upload*/
+        rcS3Uploader.uploadImageTos3(MainActivity.this, /*Context*/
+        poolId, /*Replace with your client pool Id*/
+        Region.ap-south-1, /*Replace with your s3 bucket Region*/
+        bucketName, /*Replace with your s3 bucket name*/
+        imageUri); /*Uri of image which you wish to upload*/
     }
 }
  ```
@@ -47,7 +50,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rcS3Uploader.uploadVideoTos3(MainActivity.this, videoUri); /*Uri of video which you wish to upload*/
+        rcS3Uploader.uploadImageTos3(MainActivity.this, /*Context*/
+        poolId, /*Replace with your client pool Id*/
+        Region.ap-south-1, /*Replace with your s3 bucket Region*/
+        bucketName, /*Replace with your s3 bucket name*/
+        imageUri); /*Uri of image which you wish to upload*/
     }
 }
  ```
