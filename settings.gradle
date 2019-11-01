@@ -1,0 +1,2 @@
+include ':app', ':rc-aws-s3-android-uploader-library'
+rootProject.name='s3Example'
