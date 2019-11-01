@@ -29,13 +29,13 @@ public class AmazonUtil {
      * @param context An Context instance.
      * @return A default credential provider.
      */
-    protected static CognitoCachingCredentialsProvider getCredProvider(Context context) {
+    protected static CognitoCachingCredentialsProvider getCredProvider(Context context, String poolId, Regions region) {
         if (sCredProvider == null) {
             // Initialize the Amazon Cognito credentials provider
             sCredProvider = new CognitoCachingCredentialsProvider(
                     context,
-                    AWSKeys.COGNITO_POOL_ID, // Identity Pool ID
-                    Regions.AP_SOUTHEAST_1 // Region
+                    poolId, // Identity Pool ID
+                    region // Region
             );
         }
         return sCredProvider;
@@ -48,10 +48,10 @@ public class AmazonUtil {
      * @param context An Context instance.
      * @return A default S3 client.
      */
-    public static AmazonS3Client getS3Client(Context context) {
+    public static AmazonS3Client getS3Client(Context context, String poolId, Regions regions) {
         if (sS3Client == null) {
-            sS3Client = new AmazonS3Client(getCredProvider(context));
-            sS3Client.setRegion(Region.getRegion(Regions.AP_SOUTHEAST_1));
+            sS3Client = new AmazonS3Client(getCredProvider(context, poolId, regions));
+            sS3Client.setRegion(Region.getRegion(regions));
         }
         return sS3Client;
     }
@@ -63,9 +63,9 @@ public class AmazonUtil {
      * @param context
      * @return a TransferUtility instance
      */
-    public static TransferUtility getTransferUtility(Context context) {
+    public static TransferUtility getTransferUtility(Context context, String poolId, Regions regions) {
         if (sTransferUtility == null) {
-            sTransferUtility = new TransferUtility(getS3Client(context.getApplicationContext()),
+            sTransferUtility = new TransferUtility(getS3Client(context.getApplicationContext(), poolId, regions),
                     context.getApplicationContext());
         }
 

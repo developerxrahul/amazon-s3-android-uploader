@@ -7,6 +7,7 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 
@@ -20,28 +21,28 @@ public class S3Uploader {
     private TransferUtility transferUtility;
     public S3UploadInterface s3UploadInterface;
 
-    public S3Uploader(Context context) {
+    public S3Uploader(Context context, String poolId, Regions regions ) {
         this.context = context;
-        transferUtility = AmazonUtil.getTransferUtility(context);
+        transferUtility = AmazonUtil.getTransferUtility(context, poolId, regions);
 
     }
 
-    public void initUpload(String filePath) {
+    public void initUpload(String bucketName, String filePath) {
         File file = new File(filePath);
         ObjectMetadata myObjectMetadata = new ObjectMetadata();
         myObjectMetadata.setContentType("image/png");
         String mediaUrl = file.getName();
-        TransferObserver observer = transferUtility.upload(AWSKeys.BUCKET_NAME, mediaUrl,
+        TransferObserver observer = transferUtility.upload(bucketName, mediaUrl,
                 file, CannedAccessControlList.PublicRead);
         observer.setTransferListener(new UploadListener());
     }
 
-    public void initVideoUpload(String filePath) {
+    public void initVideoUpload(String bucketName, String filePath) {
         File file = new File(filePath);
         ObjectMetadata myObjectMetadata = new ObjectMetadata();
         myObjectMetadata.setContentType("video/mp4");
         String mediaUrl = file.getName();
-        TransferObserver observer = transferUtility.upload(AWSKeys.BUCKET_NAME, mediaUrl,
+        TransferObserver observer = transferUtility.upload(bucketName, mediaUrl,
                 file, CannedAccessControlList.PublicRead);
         observer.setTransferListener(new UploadListener());
     }

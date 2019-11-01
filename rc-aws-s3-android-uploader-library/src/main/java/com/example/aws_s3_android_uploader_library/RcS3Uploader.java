@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.amazonaws.regions.Regions;
 import com.example.aws_s3_android_uploader_library.aws.S3Uploader;
 import com.example.aws_s3_android_uploader_library.aws.S3Utils;
 
@@ -18,17 +19,17 @@ public class RcS3Uploader {
 
     public static String TAG = RcS3Uploader.class.getCanonicalName();
 
-    public static void uploadImageTos3(final Context context, Uri imageUri) {
+    public static void uploadImageTos3(final Context context, final String poolId, final Regions regions, final String bucketName, Uri imageUri) {
 
-        s3uploaderObj = new S3Uploader(context);
+        s3uploaderObj = new S3Uploader(context, poolId, regions);
         final String path = getFilePathFromURI(imageUri, context);
         if (path != null) {
-            s3uploaderObj.initUpload(path);
+            s3uploaderObj.initUpload(bucketName, path);
             s3uploaderObj.setOns3UploadDone(new S3Uploader.S3UploadInterface() {
                 @Override
                 public void onUploadSuccess(String response) {
                     if (response.equalsIgnoreCase("Success")) {
-                        String urlFromS3 = S3Utils.generates3ShareUrl(context, path);
+                        String urlFromS3 = S3Utils.generates3ShareUrl(context, poolId, regions, bucketName, path);
                         if(!TextUtils.isEmpty(urlFromS3)) {
                             Log.e(TAG, "Status : File Uploaded :" +urlFromS3);
                         }
@@ -46,17 +47,17 @@ public class RcS3Uploader {
         }
     }
 
-    public static void uploadVideoTos3(final Context context, Uri imageUri) {
+    public static void uploadVideoTos3(final Context context,final String poolId,final Regions regions,final String bucketName, Uri imageUri) {
 
-        s3uploaderObj = new S3Uploader(context);
+        s3uploaderObj = new S3Uploader(context, poolId, regions);
         final String path = getFilePathFromURI(imageUri, context);
         if (path != null) {
-            s3uploaderObj.initVideoUpload(path);
+            s3uploaderObj.initVideoUpload(bucketName, path);
             s3uploaderObj.setOns3UploadDone(new S3Uploader.S3UploadInterface() {
                 @Override
                 public void onUploadSuccess(String response) {
                     if (response.equalsIgnoreCase("Success")) {
-                        String urlFromS3 = S3Utils.generates3ShareUrl(context, path);
+                        String urlFromS3 = S3Utils.generates3ShareUrl(context, poolId, regions, bucketName, path);
                         if(!TextUtils.isEmpty(urlFromS3)) {
                             Log.e(TAG, "Status : File Uploaded :" +urlFromS3);
                         }

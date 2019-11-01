@@ -35,7 +35,7 @@ public class AmazonUtil {
             sCredProvider = new CognitoCachingCredentialsProvider(
                     context,
                     AWSKeys.COGNITO_POOL_ID, // Identity Pool ID
-                    Regions.AP_SOUTHEAST_1 // Region
+                    AWSKeys.MY_REGION // Region
             );
         }
         return sCredProvider;
@@ -51,7 +51,7 @@ public class AmazonUtil {
     public static AmazonS3Client getS3Client(Context context) {
         if (sS3Client == null) {
             sS3Client = new AmazonS3Client(getCredProvider(context));
-            sS3Client.setRegion(Region.getRegion(Regions.AP_SOUTHEAST_1));
+            sS3Client.setRegion(Region.getRegion(AWSKeys.MY_REGION));
         }
         return sS3Client;
     }

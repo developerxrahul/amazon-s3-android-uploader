@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.amazonaws.HttpMethod;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ResponseHeaderOverrides;
@@ -20,15 +21,15 @@ public class S3Utils {
      * @param path image path
      * @return presignedurl
      */
-    public static String generates3ShareUrl(Context applicationContext, String path) {
+    public static String generates3ShareUrl(Context applicationContext, String poolId, Regions regions, String bucketName, String path) {
 
         File f = new File(path);
-        AmazonS3 s3client = AmazonUtil.getS3Client(applicationContext);
+        AmazonS3 s3client = AmazonUtil.getS3Client(applicationContext, poolId, regions);
 
         ResponseHeaderOverrides overrideHeader = new ResponseHeaderOverrides();
         String mediaUrl = f.getName();
         GeneratePresignedUrlRequest generatePresignedUrlRequest =
-                new GeneratePresignedUrlRequest(AWSKeys.BUCKET_NAME, mediaUrl);
+                new GeneratePresignedUrlRequest(bucketName, mediaUrl);
         generatePresignedUrlRequest.setMethod(HttpMethod.GET); // Default.
         generatePresignedUrlRequest.setResponseHeaders(overrideHeader);
 
