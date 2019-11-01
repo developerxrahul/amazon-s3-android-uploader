@@ -1,6 +1,15 @@
 # rc-s3-uploader
 A library which helps developer to upload image and video in one line of code just by implementing rc-s3-uploader in your any android project.  
 
+# Manifest
+
+Go to your manifest and paste it.
+```groovy
+<service
+     android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+     android:enabled="true" />
+```
+
 # Gradle
 
 Step 1. Add the JitPack repository to your build file
@@ -15,7 +24,7 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  implementation 'com.github.developerxrahul:rc-s3-uploader:v1.3'
+    implementation 'com.github.developerxrahul:amazon-s3-android-uploader:v1.4'
 }
  ```
 # Usage
