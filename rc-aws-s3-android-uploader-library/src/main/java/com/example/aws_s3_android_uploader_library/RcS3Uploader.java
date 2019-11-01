@@ -14,11 +14,11 @@ import com.example.aws_s3_android_uploader_library.aws.S3Utils;
 
 public class RcS3Uploader {
 
-    S3Uploader s3uploaderObj;
+    public static S3Uploader s3uploaderObj;
 
-    private String TAG = RcS3Uploader.class.getCanonicalName();
+    public static String TAG = RcS3Uploader.class.getCanonicalName();
 
-    private void uploadImageTos3(final Context context, Uri imageUri) {
+    public static void uploadImageTos3(final Context context, Uri imageUri) {
 
         s3uploaderObj = new S3Uploader(context);
         final String path = getFilePathFromURI(imageUri, context);
@@ -46,7 +46,7 @@ public class RcS3Uploader {
         }
     }
 
-    private void uploadVideoTos3(final Context context, Uri imageUri) {
+    public static void uploadVideoTos3(final Context context, Uri imageUri) {
 
         s3uploaderObj = new S3Uploader(context);
         final String path = getFilePathFromURI(imageUri, context);
@@ -74,7 +74,7 @@ public class RcS3Uploader {
         }
     }
 
-    private String getFilePathFromURI(Uri selectedImageUri, Context context) {
+    public static String getFilePathFromURI(Uri selectedImageUri, Context context) {
         String filePath = "";
         String wholeID = DocumentsContract.getDocumentId(selectedImageUri);
 
