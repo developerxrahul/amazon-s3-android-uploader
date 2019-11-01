@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         poolId, /*Replace with your client pool Id*/
         Region.ap-south-1, /*Replace with your s3 bucket Region*/
         bucketName, /*Replace with your s3 bucket name*/
-        imageUri); /*Uri of image which you wish to upload*/
+        videoUri); /*Uri of video which you wish to upload*/
     }
 }
  ```
