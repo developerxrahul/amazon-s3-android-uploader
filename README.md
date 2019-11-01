@@ -15,7 +15,7 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  implementation 'com.github.developerxrahul:rc-s3-uploader:1.1'
+  implementation 'com.github.developerxrahul:rc-s3-uploader:v1.3'
 }
  ```
 # Usage
